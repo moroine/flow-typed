@@ -1,6 +1,8 @@
 /* @flow */
 /*eslint-disable no-undef, no-unused-vars, no-console*/
-import _, { compose, pipe, uncurryN, curry, pipeP, pipeK, tryCatch, applyTo } from "ramda";
+import _, { compose, invoker, pipe, uncurryN, curry, pipeP, pipeK, tryCatch, applyTo } from "ramda";
+import { describe, it } from 'flow-typed-test';
+
 // Function
 const ns: Array<number> = [1, 2, 3, 4, 5];
 const ss: Array<string> = ["one", "two", "three", "four"];
@@ -128,7 +130,7 @@ const str5: string = _.pipe(_.replace("3", "4"), _.toLower, _.trim)(" 1,2,3 ");
 // --- Curry ---
 declare var bar1: string => "bar1";
 declare var bar2: (string, number) => "bar2";
-declare var bar6: (string, number, boolean, null, {...}, []) => "bar6";
+declare var bar6: (string, number, boolean, null, { ... }, []) => "bar6";
 
 const foo1 = curry(bar1);
 const foo2 = curry(bar2);
@@ -156,7 +158,7 @@ const foo6_15: "bar6" = foo6("", 0)(true, null, {})([]);
 const foo6_16: "bar6" = foo6("")(0, true, null, {})([]);
 
 // $ExpectError
-const foo6_1_Error1: "bar6" = foo6(false, 0, true, null, {}, []);
+const foo6_1_Error1: "bar6" = foo6(false, 0, true, null, {}, ['']);
 // $ExpectError
 const foo6_2_Error1: "bar6" = foo6(false)(0, true, null, {}, []);
 // $ExpectError
@@ -300,31 +302,35 @@ const flipped: (x: number, y: boolean, z: string) => number = _.flip(
 const flipped2: (x: number, y: boolean) => (z: string) => number = _.flip(
   (x: boolean, y: number, z: string) => 1
 );
-const obb = {
-  doStuff(x: string, y: number, z: boolean) {
-    return 1;
-  },
-  doLessStuff(x: string, y: number) {
-    return "hello";
-  },
-  doEvenLessStuff(x: string) {
-    return true;
-  }
-};
-const doStuff: (
-  x: string,
-  y: number,
-  z: boolean,
-  obj: typeof obb
-) => number = _.invoker(3, "doStuff");
-//$ExpectError
-const doLessStuff: (
-  x: string,
-  y: number,
-  z: boolean,
-  obj: typeof obb
-) => number = _.invoker(3, "doLStuff");
-const stuffDone: number = doStuff("dd", 1, true, obb);
+
+describe('invoker', () => {
+  const obb = {
+    doStuff(x: string, y: number, z: boolean) {
+      return 1;
+    },
+    doLessStuff(x: string, y: number) {
+      return "hello";
+    },
+    doEvenLessStuff(x: string) {
+      return true;
+    }
+  };
+
+  it('should properly create invoker', () => {
+    const doStuff = invoker<typeof obb, "doStuff", typeof obb.doStuff>(3, "doStuff");
+    const stuffDone: number = doStuff("dd", 1, true, obb);
+  });
+
+  it('should error when method doesn\'t exists', () => {
+    // $ExpectError
+    invoker<typeof obb, "doLStuff", () => mixed>(0, "doLStuff")(obb);
+  });
+
+  it('should ensure function arity', () => {
+    // $ExpectError
+    invoker<typeof obb, "doStuff", typeof obb.doStuff>(2, "doStuff");
+  });
+});
 
 const range = _.juxt([_.toString, Math.min, Math.max]);
 const ju: Array<number | string> = range(3, 4, 9, -3);

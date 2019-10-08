@@ -401,14 +401,14 @@ const str: string = "hello world";
       const readOnly: $ReadOnlyArray<number> = [1, 2, 3];
       const appendResult1: $ReadOnlyArray<number|string> = append('s', readOnly);
       const appendResult2: $ReadOnlyArray<number|string> = append('s')(readOnly);
-      
+
       //$ExpectError
       const appendResult3: $ReadOnlyArray<number|null> = append('s', readOnly);
       //$ExpectError
       const appendResult4: $ReadOnlyArray<number> = append('s')(readOnly);
     });
   });
-  
+
   const xxxs: Array<number> = _.intersperse(1, [1, 2, 3]);
 
   const pairxs: [number, string] = _.pair(2, "str");
@@ -616,10 +616,13 @@ const str: string = "hello world";
       const arr2: Array<string> = without(['a'])(['a', 'b', 'c']);
     });
     it('should fail when first list does not match second list type', () => {
+      const numArr: number[] = [1, 2, 3, 4, 5];
       // $ExpectError
-      const arr1: Array<number> = without(['1', '2'], [1, 2, 3, 4, 5]);
+      const arr1: Array<number> = without(['1', '2'], numArr);
+
+      const strArr: string[] = ['a', 'b', 'c'];
       // $ExpectError
-      const arr2: Array<string> = without([1])(['a', 'b', 'c']);
+      const arr2: Array<string> = without([1])(strArr);
     });
     it('should work with readonly array', () => {
       const list1: $ReadOnlyArray<number|string> =  [1, 'four', 5];
