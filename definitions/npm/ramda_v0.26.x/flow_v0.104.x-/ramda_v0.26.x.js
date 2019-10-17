@@ -61,18 +61,18 @@ declare module ramda {
   declare type CurriedFunction1<A, R> = (...r: [A & A]) => R;
 
   declare type CurriedFunction2<A, B, R> = (
-    ((...r: [A]) => CurriedFunction1<B & B, R>) &
-    ((...r: [A & A, B & B]) => R) &
-    ((...r: [$npm$ramda$Placeholder, B & B]) => CurriedFunction1<A & A, R>)
+    ((...r: [A]) => CurriedFunction1<B, R>) &
+    ((...r: [A, B]) => R) &
+    ((...r: [$npm$ramda$Placeholder, B]) => CurriedFunction1<A, R>)
   );
 
   declare type CurriedFunction3<A, B, C, R> = (
-    ((...r: [A & A]) => CurriedFunction2<B & B, C & C, R>) &
-    ((...r: [A & A, B & B]) => CurriedFunction1<C & C, R>) &
-    ((...r: [A & A, B & B, C & C]) => R) &
-    ((...r: [$npm$ramda$Placeholder, B & B]) => CurriedFunction2<A & A, C & C, R>) &
-    ((...r: [$npm$ramda$Placeholder, B & B, C & C]) => CurriedFunction1<A & A, R>) &
-    ((...r: [A & A, $npm$ramda$Placeholder, C & C ]) => CurriedFunction1<B & B, R>)
+    ((...r: [A]) => CurriedFunction2<B, C, R>) &
+    ((...r: [A, B]) => CurriedFunction1<C, R>) &
+    ((...r: [A, B, C]) => R) &
+    ((...r: [$npm$ramda$Placeholder, B]) => CurriedFunction2<A, C, R>) &
+    ((...r: [$npm$ramda$Placeholder, B, C]) => CurriedFunction1<A, R>) &
+    ((...r: [A, $npm$ramda$Placeholder, C ]) => CurriedFunction1<B, R>)
   );
 
   declare type CurriedFunction4<
@@ -82,16 +82,16 @@ declare module ramda {
     D,
     R,
   > = (
-     ((A & A) => CurriedFunction3<B & B, C & C, D & D, R>) &
-     ((...r: [A & A, B & B]) => CurriedFunction2<C & C, D & D, R>) &
-     ((...r: [A & A, B & B, C & C]) => CurriedFunction1<D & D, R>) &
-     ((...r: [A & A, B & B, C & C, D & D]) => R) &
-     ((...r: [$npm$ramda$Placeholder, B & B]) => CurriedFunction3<A & A, C & C, D & D, R>) &
-     ((...r: [$npm$ramda$Placeholder, B & B, C & C]) => CurriedFunction2<A & A, D & D, R>) &
-     ((...r: [B & B, $npm$ramda$Placeholder, C & C]) => CurriedFunction2<B & B, D & D, R>) &
-     ((...r: [$npm$ramda$Placeholder, B & B, C & C, D & D]) => CurriedFunction1<A & A, R>) &
-     ((...r: [A & A, $npm$ramda$Placeholder, C & C, D & D]) => CurriedFunction1<B & B, R>) &
-     ((...r: [A & A, B & B, $npm$ramda$Placeholder, D & D]) => CurriedFunction1<C & C, R>)
+     ((...r: [A]) => CurriedFunction3<B, C, D, R>) &
+     ((...r: [A, B]) => CurriedFunction2<C, D, R>) &
+     ((...r: [A, B, C]) => CurriedFunction1<D, R>) &
+     ((...r: [A, B, C, D]) => R) &
+     ((...r: [$npm$ramda$Placeholder, B]) => CurriedFunction3<A, C, D, R>) &
+     ((...r: [$npm$ramda$Placeholder, B, C]) => CurriedFunction2<A, D, R>) &
+     ((...r: [B, $npm$ramda$Placeholder, C]) => CurriedFunction2<B, D, R>) &
+     ((...r: [$npm$ramda$Placeholder, B, C, D]) => CurriedFunction1<A, R>) &
+     ((...r: [A, $npm$ramda$Placeholder, C, D]) => CurriedFunction1<B, R>) &
+     ((...r: [A, B, $npm$ramda$Placeholder, D]) => CurriedFunction1<C, R>)
   );
 
   declare type CurriedFunction5<
@@ -102,21 +102,21 @@ declare module ramda {
     E,
     R,
   > = (
-    ((...r: [A & A]) => CurriedFunction4<B & B, C & C, D & D, E & E, R>) &
-    ((...r: [A & A, B & B]) => CurriedFunction3<C & C & C, D & D & D, E & E & E, R>) &
-    ((...r: [A & A, B & B, C & C]) => CurriedFunction2<D & D & D, E & E & E, R>) &
-    ((...r: [A & A, B & B, C & C, D & D]) => CurriedFunction1<E & E, R>) &
-    ((...r: [A & A, B & B, C & C, D & D, E & E]) => R) &
-    ((...r: [$npm$ramda$Placeholder, B & B]) => CurriedFunction4<A & A, C & C & C, D & D & D, E & E & E, R>) &
-    ((...r: [$npm$ramda$Placeholder, B & B, C & C]) => CurriedFunction3<A & A, D & D & D, E & E & E, R>) &
-    ((...r: [A & A, $npm$ramda$Placeholder, C & C]) => CurriedFunction3<B & B, D & D & D, E & E & E, R>) &
-    ((...r: [$npm$ramda$Placeholder, B & B, C & C & C, D & D]) => CurriedFunction2<A & A, E & E & E, R>) &
-    ((...r: [A & A, $npm$ramda$Placeholder, C & C & C, D & D]) => CurriedFunction2<B & B, E & E & E, R>) &
-    ((...r: [A & A, B & B, $npm$ramda$Placeholder, D & D]) => CurriedFunction2<C & C, E & E, R>) &
-    ((...r: [$npm$ramda$Placeholder, B & B, C & C, D & D, E & E]) => CurriedFunction1<A & A, R>) &
-    ((...r: [A & A, $npm$ramda$Placeholder, C & C, D & D, E & E]) => CurriedFunction1<B & B, R>) &
-    ((...r: [A & A, B & B, $npm$ramda$Placeholder, D & D, E & E]) => CurriedFunction1<C & C, R>) &
-    ((...r: [A & A, B & B, C & C, $npm$ramda$Placeholder, E & E]) => CurriedFunction1<D & D, R>)
+    ((...r: [A]) => CurriedFunction4<B, C, D, E, R>) &
+    ((...r: [A, B]) => CurriedFunction3<C, D, E, R>) &
+    ((...r: [A, B, C]) => CurriedFunction2<D, E, R>) &
+    ((...r: [A, B, C, D]) => CurriedFunction1<E, R>) &
+    ((...r: [A, B, C, D, E]) => R) &
+    ((...r: [$npm$ramda$Placeholder, B]) => CurriedFunction4<A, C, D, E, R>) &
+    ((...r: [$npm$ramda$Placeholder, B, C]) => CurriedFunction3<A, D, E, R>) &
+    ((...r: [A, $npm$ramda$Placeholder, C]) => CurriedFunction3<B, D, E, R>) &
+    ((...r: [$npm$ramda$Placeholder, B, C, D]) => CurriedFunction2<A, E, R>) &
+    ((...r: [A, $npm$ramda$Placeholder, C, D]) => CurriedFunction2<B, E, R>) &
+    ((...r: [A, B, $npm$ramda$Placeholder, D]) => CurriedFunction2<C, E, R>) &
+    ((...r: [$npm$ramda$Placeholder, B, C, D, E]) => CurriedFunction1<A, R>) &
+    ((...r: [A, $npm$ramda$Placeholder, C, D, E]) => CurriedFunction1<B, R>) &
+    ((...r: [A, B, $npm$ramda$Placeholder, D, E]) => CurriedFunction1<C, R>) &
+    ((...r: [A, B, C, $npm$ramda$Placeholder, E]) => CurriedFunction1<D, R>)
   );
 
   declare type CurriedFunction6<
@@ -128,27 +128,27 @@ declare module ramda {
     F,
     R,
   > = (
-    ((...r: [A & A]) => CurriedFunction5<B & B, C & C, D & D, E & E, F & F, R>) &
-    ((...r: [A & A, B & B]) => CurriedFunction4<C & C, D & D, E & E, F & F, R>) &
-    ((...r: [A & A, B & B, C & C]) => CurriedFunction3<D & D, E & E, F & F, R>) &
-    ((...r: [A & A, B & B, C & C, D & D]) => CurriedFunction2<E & E, F & F, R>) &
-    ((...r: [A & A, B & B, C & C, D & D, E & E]) => CurriedFunction1<F & F, R>) &
-    ((...r: [A & A, B & B, C & C, D & D, E & E, F & F]) => R) &
-    ((...r: [$npm$ramda$Placeholder, B & B]) => CurriedFunction5<A & A, C & C, D & D, E & E, F & F, R>) &
-    ((...r: [$npm$ramda$Placeholder, B & B, C & C]) => CurriedFunction4<A & A, D & D, E & E, F & F, R>) &
-    ((...r: [A & A, $npm$ramda$Placeholder, C & C]) => CurriedFunction4<B & B, D & D, E & E, F & F, R>) &
-    ((...r: [$npm$ramda$Placeholder, B & B, C & C, D & D]) => CurriedFunction3<A & A, E & E, F & F, R>) &
-    ((...r: [A & A, $npm$ramda$Placeholder, C & C, D & D]) => CurriedFunction3<B & B, E & E, F & F, R>) &
-    ((...r: [A & A, B & B, $npm$ramda$Placeholder, D & D]) => CurriedFunction3<C & C, E & E, F & F, R>) &
-    ((...r: [$npm$ramda$Placeholder, B & B, C & C, D & D, E & E]) => CurriedFunction2<A & A, F & F, R>) &
-    ((...r: [A & A, $npm$ramda$Placeholder, C & C, D & D, E & E]) => CurriedFunction2<B & B, F & F, R>) &
-    ((...r: [A & A, B & B, $npm$ramda$Placeholder, D & D, E & E]) => CurriedFunction2<C & C, F & F, R>) &
-    ((...r: [A & A, B & B, C & C, $npm$ramda$Placeholder, E & E]) => CurriedFunction2<D & D, F & F, R>) &
-    ((...r: [$npm$ramda$Placeholder, B & B, C & C, D & D, E & E, F & F]) => CurriedFunction1<A & A, R>) &
-    ((...r: [A & A, $npm$ramda$Placeholder, C & C, D & D, E & E, F & F]) => CurriedFunction1<B & B, R>) &
-    ((...r: [A & A, B & B, $npm$ramda$Placeholder, D & D, E & E, F & F]) => CurriedFunction1<C & C, R>) &
-    ((...r: [A & A, B & B, C & C, $npm$ramda$Placeholder, E & E, F & F]) => CurriedFunction1<D & D, R>) &
-    ((...r: [A & A, B & B, C & C, D & D, $npm$ramda$Placeholder, F & F]) => CurriedFunction1<E & E, R>)
+    ((...r: [A]) => CurriedFunction5<B, C, D, E, F, R>) &
+    ((...r: [A, B]) => CurriedFunction4<C, D, E, F, R>) &
+    ((...r: [A, B, C]) => CurriedFunction3<D, E, F, R>) &
+    ((...r: [A, B, C, D]) => CurriedFunction2<E, F, R>) &
+    ((...r: [A, B, C, D, E]) => CurriedFunction1<F, R>) &
+    ((...r: [A, B, C, D, E, F]) => R) &
+    ((...r: [$npm$ramda$Placeholder, B]) => CurriedFunction5<A, C, D, E, F, R>) &
+    ((...r: [$npm$ramda$Placeholder, B, C]) => CurriedFunction4<A, D, E, F, R>) &
+    ((...r: [A, $npm$ramda$Placeholder, C]) => CurriedFunction4<B, D, E, F, R>) &
+    ((...r: [$npm$ramda$Placeholder, B, C, D]) => CurriedFunction3<A, E, F, R>) &
+    ((...r: [A, $npm$ramda$Placeholder, C, D]) => CurriedFunction3<B, E, F, R>) &
+    ((...r: [A, B, $npm$ramda$Placeholder, D]) => CurriedFunction3<C, E, F, R>) &
+    ((...r: [$npm$ramda$Placeholder, B, C, D, E]) => CurriedFunction2<A, F, R>) &
+    ((...r: [A, $npm$ramda$Placeholder, C, D, E]) => CurriedFunction2<B, F, R>) &
+    ((...r: [A, B, $npm$ramda$Placeholder, D, E]) => CurriedFunction2<C, F, R>) &
+    ((...r: [A, B, C, $npm$ramda$Placeholder, E]) => CurriedFunction2<D, F, R>) &
+    ((...r: [$npm$ramda$Placeholder, B, C, D, E, F]) => CurriedFunction1<A, R>) &
+    ((...r: [A, $npm$ramda$Placeholder, C, D, E, F]) => CurriedFunction1<B, R>) &
+    ((...r: [A, B, $npm$ramda$Placeholder, D, E, F]) => CurriedFunction1<C, R>) &
+    ((...r: [A, B, C, $npm$ramda$Placeholder, E, F]) => CurriedFunction1<D, R>) &
+    ((...r: [A, B, C, D, $npm$ramda$Placeholder, F]) => CurriedFunction1<E, R>)
   );
 
   declare type Partial = (<A, R>((...r: [A]) => R, args: [A]) => () => R) &
@@ -455,12 +455,12 @@ declare module ramda {
   declare function then<A, R>(onSuccess: UnaryFn<A, R> | UnaryPromiseFn<A, R>): CurriedFunction1<Promise<A>, Promise<R>>
   declare function then<A, R>(onSuccess: UnaryFn<A, R> | UnaryPromiseFn<A, R>, p: Promise<A>): Promise<R>;
 
-  declare function curry<A, R>(fn: (...r: [A]) => R): CurriedFunction1<A & A, R>;
-  declare function curry<A, B, R>(fn: (...r: [A, B]) => R): CurriedFunction2<A & A, B & B, R>;
-  declare function curry<A, B, C, R>(fn: (...r: [A, B, C]) => R): CurriedFunction3<A & A, B & B, C & C, R>;
-  declare function curry<A, B, C, D, R>(fn: (...r: [A, B, C, D]) => R): CurriedFunction4<A & A, B & B, C & C, D & D, R>;
-  declare function curry<A, B, C, D, E, R>(fn: (...r: [A, B, C, D, E]) => R): CurriedFunction5<A & A, B & B, C & C, D & D, E & E, R>;
-  declare function curry<A, B, C, D, E, F, R>(fn: (...r: [A, B, C, D, E, F]) => R): CurriedFunction6<A & A, B & B, C & C, D & D, E & E, F & F, R>;
+  declare function curry<A, R>(fn: (...r: [A]) => R): CurriedFunction1<A, R>;
+  declare function curry<A, B, R>(fn: (...r: [A, B]) => R): CurriedFunction2<A, B, R>;
+  declare function curry<A, B, C, R>(fn: (...r: [A, B, C]) => R): CurriedFunction3<A, B, C, R>;
+  declare function curry<A, B, C, D, R>(fn: (...r: [A, B, C, D]) => R): CurriedFunction4<A, B, C, D, R>;
+  declare function curry<A, B, C, D, E, R>(fn: (...r: [A, B, C, D, E]) => R): CurriedFunction5<A, B, C, D, E, R>;
+  declare function curry<A, B, C, D, E, F, R>(fn: (...r: [A, B, C, D, E, F]) => R): CurriedFunction6<A, B, C, D, E, F, R>;
   declare function curryN(
     length: number,
     fn: (...args: Array<any>) => any
